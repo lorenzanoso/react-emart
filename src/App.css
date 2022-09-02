@@ -1,0 +1,30 @@
+/* <!-- ---- Navbar ---- --> */
+
+.navbar-brand img{
+    width: 30px;
+}
+#brand-name{
+    letter-spacing: 2px;
+    font-family: var(--lg-font);
+}
+.navbar{
+    box-shadow: 1px 1px 5px 1px rgba(210, 210, 210, 0.8);
+}
+
+.nav-item:not(:last-child){
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-btns .mini-icon-button{
+    border:0;
+}
+
+.nav-link:hover{
+    color: var(--pink) !important;
+}
+
+@media(min-width: 992px){
+    .nav-item:not(:last-child){
+        border-bottom:none;
+    }
+}
