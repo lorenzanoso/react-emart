@@ -1,10 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faShoppingCart,
-  faHeart,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart, faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 import { Container, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
@@ -26,27 +22,24 @@ function NavigationBar() {
           </span>
         </NavLink>
         <div className="nav-btns order-lg-2">
-          <button
-            className="btn position-relative mini-icon-button"
+          <NavLink
+            to="/cart"
+            className="btn position-relative mini-icon-button me-3"
             type="button"
           >
             <FontAwesomeIcon icon={faShoppingCart} />
             <span className="badge position-absolute top-0 bg-primary translate-middle start-100">
               5
             </span>
-          </button>
-          <button
+          </NavLink>
+          <NavLink
+            to="/login"
             className="btn position-relative mini-icon-button"
             type="button"
           >
-            <FontAwesomeIcon icon={faHeart} />
-            <span className="badge position-absolute top-0 bg-primary translate-middle start-100">
-              2
-            </span>
-          </button>
-          <button className="btn mini-icon-button" type="button">
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
+            <FontAwesomeIcon icon={faSignOut} />
+            <span> LOGOUT</span>
+          </NavLink>
         </div>
         <Navbar.Toggle className="border-0">
           <span className="navbar-toggler-icon"></span>
@@ -54,37 +47,33 @@ function NavigationBar() {
         <Navbar.Collapse className="order-lg-1">
           <ul className="navbar-nav mx-auto text-center">
             <li className="nav-item p-2">
-              <a href="#home" className="nav-link text-dark text-uppercase">
-                Home
-              </a>
+              <NavLink to="/" className="nav-link text-dark text-uppercase">
+                HOME
+              </NavLink>
             </li>
-            <li className="nav-item p-2 ">
-              <a
-                href="#collection"
+            <li className="nav-item p-2">
+              <NavLink
+                to="/products"
                 className="nav-link text-dark text-uppercase"
               >
-                Collection
-              </a>
+                PRODUCTS
+              </NavLink>
             </li>
             <li className="nav-item p-2">
-              <a href="#specials" className="nav-link text-dark text-uppercase">
-                Specials
-              </a>
+              <NavLink
+                to="/about-us"
+                className="nav-link text-dark text-uppercase"
+              >
+                ABOUT US
+              </NavLink>
             </li>
             <li className="nav-item p-2">
-              <a href="#blogs" className="nav-link text-dark text-uppercase">
-                Blogs
-              </a>
-            </li>
-            <li className="nav-item p-2">
-              <a href="#about" className="nav-link text-dark text-uppercase">
-                About Us
-              </a>
-            </li>
-            <li className="nav-item p-2">
-              <a href="#popular" className="nav-link text-dark text-uppercase">
-                Popular
-              </a>
+              <NavLink
+                to="/contact-us"
+                className="nav-link text-dark text-uppercase"
+              >
+                CONTACT US
+              </NavLink>
             </li>
           </ul>
         </Navbar.Collapse>

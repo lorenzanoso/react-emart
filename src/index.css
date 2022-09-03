@@ -10,6 +10,10 @@ body{
   font-family: var(--sm-font);
 }
 
+.btn:active{
+  color: #000;
+}
+
 .btn:not(.mini-icon-button){
   background-color: #fff;
   color: 1px solid rgb(85, 85, 85);
@@ -21,8 +25,10 @@ body{
   background-color: var(--pink);
   color: #fff;
   border: 1px solid var(--pink);
+}
 
-
+.mini-icon-button:hover{
+  color:red;
 }
 
 .title h2::before{
@@ -34,4 +40,50 @@ body{
   left: -20px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+/* <!-- ---- Specials ---- --> */
+.special-img span{
+    top: 20px;
+    right: 20px;
+}
+.special-img:hover img{
+    transform: scale(1.2);
+}
+.special-img img{
+   
+  transition: all 0.3s ease;
+}
+
+/* <!-- ---- Banner ---- --> */
+#banner{
+  background: url(../public/images/offer_img.jpg) center/cover;
+}
+#banner .row{
+  min-height: 60vh;
+}
+.banner-content span{
+  font-size: 28px;
+}
+.banner-content h2{
+  font-size: 60px;
+  font-family: var(--lg-font);
+}
+
+#newsletter p{
+  max-width: 600px;
+}
+
+#newsletter .input-group{
+  max-width: 500px;
+}
+#newsletter .form-control{
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  
+}
+
+footer .brand{
+  font-family: var(--lg-font);
+  letter-spacing: 2px;
 }
