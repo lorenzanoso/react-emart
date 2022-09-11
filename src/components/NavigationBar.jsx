@@ -1,11 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faShoppingCart,
+  faSignIn,
+  faSignOut,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { Container, Navbar } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { auth, db } from "../firebase";
+import * as actionUser from "../redux/actions/actionUser";
+import { bindActionCreators } from "redux";
+import { useDispatch, useSelector } from "react-redux";
+import Spinner from "react-spinkit";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 function NavigationBar() {
+  const activeUser = useSelector((state) => state.activeUser);
+  const [loading, setLoading] = useState(false);
+  const { logoutUser } = bindActionCreators(actionUser, useDispatch());
+  const navigate = useNavigate();
+  const [cartProducts] = useCollection(
+    activeUser?.id &&
+      db.collection("users").doc(activeUser.id).collection("cart")
+  );
+
+  const logout = (e) => {
+    e.preventDefault();
+    auth.signOut();
+
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      logoutUser();
+      navigate("/login");
+    }, 1000);
+  };
+
+  if (loading) {
+    return (
+      <div className="m-5">
+        <Spinner name="ball-spin-fade-loader" color="blue" fadeIn="none" />
+      </div>
+    );
+  }
+
   return (
     <Navbar bg="light" expand="lg" className=" bg-white fixed-top py-4">
       <Container>
@@ -22,24 +62,48 @@ function NavigationBar() {
           </span>
         </NavLink>
         <div className="nav-btns order-lg-2">
-          <NavLink
-            to="/cart"
-            className="btn position-relative mini-icon-button me-3"
-            type="button"
-          >
-            <FontAwesomeIcon icon={faShoppingCart} />
-            <span className="badge position-absolute top-0 bg-primary translate-middle start-100">
-              5
-            </span>
-          </NavLink>
-          <NavLink
-            to="/login"
-            className="btn position-relative mini-icon-button"
-            type="button"
-          >
-            <FontAwesomeIcon icon={faSignOut} />
-            <span> LOGOUT</span>
-          </NavLink>
+          {activeUser.email ? (
+            <>
+              <NavLink
+                to="/cart"
+                className="btn position-relative mini-icon-button me-3"
+                type="button"
+              >
+                <FontAwesomeIcon icon={faShoppingCart} />
+                <span className="badge position-absolute top-0 bg-primary translate-middle start-100">
+                  {cartProducts ? cartProducts?.docs.length : 0}
+                </span>
+              </NavLink>
+              <NavLink
+                to="/login"
+                className="btn position-relative mini-icon-button"
+                type="button"
+                onClick={logout}
+              >
+                <FontAwesomeIcon icon={faSignOut} />
+                <span> LOGOUT</span>
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/login"
+                className="btn position-relative mini-icon-button me-3"
+                type="button"
+              >
+                <FontAwesomeIcon icon={faSignIn} />
+                <span>LOGIN</span>
+              </NavLink>
+              <NavLink
+                to="/signup "
+                className="btn position-relative mini-icon-button"
+                type="button"
+              >
+                <FontAwesomeIcon icon={faEdit} />
+                <span> REGISTER</span>
+              </NavLink>
+            </>
+          )}
         </div>
         <Navbar.Toggle className="border-0">
           <span className="navbar-toggler-icon"></span>

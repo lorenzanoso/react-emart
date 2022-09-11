@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
-import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { db } from "../../firebase";
 import Footer from "../Footer";
+import firebase from "firebase/compat/app";
 
 function Product() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState({});
+  const activeUser = useSelector((state) => state.activeUser);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -35,6 +40,19 @@ function Product() {
     );
   };
 
+  const addProductToCart = (e) => {
+    e.preventDefault();
+
+    if (activeUser.id) {
+      db.collection("users").doc(activeUser.id).collection("cart").add({
+        product: product,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+    } else {
+      navigate("/login");
+    }
+  };
+
   const renderProduct = () => {
     return (
       <>
@@ -54,7 +72,12 @@ function Product() {
           </p>
           <h3 className="display-6 fw-bold my-4">$ {product.price}</h3>
           <p className="lead">{product.description}</p>
-          <button className="btn outline-dark px-4 p-2">Add to Cart</button>
+          <button
+            className="btn outline-dark px-4 p-2"
+            onClick={addProductToCart}
+          >
+            Add to Cart
+          </button>
           <Link to="/cart" className="btn btn-outline-dark ms-2 px-3 py-2">
             Go To Cart
           </Link>

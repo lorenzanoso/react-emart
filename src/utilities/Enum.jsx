@@ -107,3 +107,66 @@ export const blogs = [
     author: "Steve Doe",
   },
 ];
+
+export const topRated = [
+  {
+    id: 1,
+    image: "images/top_rated_1.jpg",
+    title: "Blue Shirt",
+    price: "$ 20.00",
+  },
+  {
+    id: 2,
+    image: "images/top_rated_2.jpg",
+    title: "Smart Watch",
+    price: "$ 25.00",
+  },
+  {
+    id: 3,
+    image: "images/top_rated_3.jpg",
+    title: "Red Jacket",
+    price: "$ 22.00",
+  },
+];
+
+export const bestSelling = [
+  {
+    id: 1,
+    image: "images/best_selling_1.jpg",
+    title: "Formal Suit",
+    price: "$ 119.00",
+  },
+  {
+    id: 2,
+    image: "images/best_selling_2.jpg",
+    title: "Blazer",
+    price: "$ 99.00",
+  },
+  {
+    id: 3,
+    image: "images/best_selling_3.jpg",
+    title: "Plain Shirt",
+    price: "$ 15.00",
+  },
+];
+
+export const onSale = [
+  {
+    id: 1,
+    image: "images/on_sale_1.jpg",
+    title: "Woman Bag",
+    price: "$ 89.00",
+  },
+  {
+    id: 2,
+    image: "images/on_sale_2.jpg",
+    title: "Jacket",
+    price: "$ 89.00",
+  },
+  {
+    id: 3,
+    image: "images/best_selling_3.jpg",
+    title: "Shoes",
+    price: "$ 99.00",
+  },
+];
